@@ -51,10 +51,10 @@
                     <div class="flex items-center md:items-start md:flex-col gap-4 sm:gap-5">
                         <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#18181b] border border-[#27272a] overflow-hidden shrink-0">
                             <img 
-                                src="https://unavatar.io/instagram/akmavren?fallback=https://unavatar.io/tiktok/akmavren" 
+                                src="avatar.jpg" 
                                 alt="akmavren"
                                 class="w-full h-full object-cover"
-                                onerror="this.style.display='none'; document.getElementById('fallback-avatar').style.display='flex';"
+                                onerror="this.onerror=null; this.src='https://unavatar.io/instagram/akmavren'; this.onerror=function(){this.style.display='none'; document.getElementById('fallback-avatar').style.display='flex';};"
                             >
                             <div id="fallback-avatar" style="display: none;" class="w-full h-full bg-[#18181b] items-center justify-center text-2xl font-bold text-zinc-300">
                                 AK
