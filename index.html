@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>akmavren</title>
+
+    <!-- Favicon (иконка во вкладке браузера) -->
+    <link rel="icon" type="image/jpeg" href="avatar.jpg">
+    <link rel="apple-touch-icon" href="avatar.jpg">
+
+    <!-- Open Graph / Красивое превью ссылки в Telegram, Discord и соцсетях -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="akmavren">
+    <meta property="og:description" content="Instagram • TikTok • Telegram • Discord (z1fex)">
+    <meta property="og:image" content="avatar.jpg">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="akmavren">
+    <meta name="twitter:description" content="Instagram • TikTok • Telegram • Discord (z1fex)">
+    <meta name="twitter:image" content="avatar.jpg">
+    <meta name="theme-color" content="#09090b">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Шрифты Inter и JetBrains Mono -->
@@ -82,8 +98,10 @@
             <!-- Правая часть: Сетка соцсетей (1 колонка на мобильных, 2x2 на ПК) -->
             <section class="md:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 
-                <!-- Instagram -->
-                <a href="https://www.instagram.com/akmavren" target="_blank" rel="noopener noreferrer"
+                <!-- Instagram (Умное открытие приложения на телефоне + веб на ПК) -->
+                <a href="https://www.instagram.com/akmavren" 
+                   onclick="return openSmartLink(event, 'instagram://user?username=akmavren', 'https://www.instagram.com/akmavren')"
+                   target="_blank" rel="noopener noreferrer"
                    class="group bg-[#111113] hover:bg-[#161619] border border-[#222225] hover:border-[#36363b] rounded-3xl p-5 sm:p-6 flex flex-row sm:flex-col items-center sm:items-start justify-between transition-colors duration-200 min-h-[84px] sm:min-h-[168px]">
                     <div class="flex sm:w-full items-center justify-between gap-4">
                         <div class="w-11 h-11 rounded-2xl bg-[#18181b] border border-[#27272a] flex items-center justify-center text-zinc-200 group-hover:text-white transition-colors">
@@ -114,8 +132,10 @@
                     <i class="sm:hidden fa-solid fa-arrow-up-right text-zinc-600 text-xs"></i>
                 </a>
 
-                <!-- Telegram -->
-                <a href="https://t.me/akmavren" target="_blank" rel="noopener noreferrer"
+                <!-- Telegram (Умное открытие приложения tg:// на телефоне и ПК + веб фолбэк) -->
+                <a href="https://t.me/akmavren" 
+                   onclick="return openSmartLink(event, 'tg://resolve?domain=akmavren', 'https://t.me/akmavren')"
+                   target="_blank" rel="noopener noreferrer"
                    class="group bg-[#111113] hover:bg-[#161619] border border-[#222225] hover:border-[#36363b] rounded-3xl p-5 sm:p-6 flex flex-row sm:flex-col items-center sm:items-start justify-between transition-colors duration-200 min-h-[84px] sm:min-h-[168px]">
                     <div class="flex sm:w-full items-center justify-between gap-4">
                         <div class="w-11 h-11 rounded-2xl bg-[#18181b] border border-[#27272a] flex items-center justify-center text-zinc-200 group-hover:text-white transition-colors">
@@ -130,10 +150,10 @@
                     <i class="sm:hidden fa-solid fa-arrow-up-right text-zinc-600 text-xs"></i>
                 </a>
 
-                <!-- Discord (Ссылка + копирование ника z1fex) -->
+                <!-- Discord (Умное открытие приложения + копирование ника z1fex) -->
                 <div class="group bg-[#111113] hover:bg-[#161619] border border-[#222225] hover:border-[#36363b] rounded-3xl p-5 sm:p-6 flex flex-row sm:flex-col items-center sm:items-start justify-between transition-colors duration-200 min-h-[84px] sm:min-h-[168px] relative">
                     <div class="flex sm:w-full items-center justify-between gap-4">
-                        <a href="https://discord.com/users/z1fex" target="_blank" rel="noopener noreferrer" onclick="copyDiscord()"
+                        <a href="https://discord.com/app" onclick="return openDiscordSmart(event)"
                            class="w-11 h-11 rounded-2xl bg-[#18181b] border border-[#27272a] flex items-center justify-center text-zinc-200 group-hover:text-white transition-colors">
                             <i class="fa-brands fa-discord text-lg"></i>
                         </a>
@@ -145,7 +165,7 @@
                         </button>
                     </div>
 
-                    <a href="https://discord.com/users/z1fex" target="_blank" rel="noopener noreferrer" onclick="copyDiscord()"
+                    <a href="https://discord.com/app" onclick="return openDiscordSmart(event)"
                        class="flex-1 sm:flex-none ml-4 sm:ml-0 sm:mt-6 block">
                         <div class="font-semibold text-base text-zinc-100">Discord</div>
                         <div class="text-xs font-mono text-zinc-500 mt-0.5">z1fex</div>
@@ -229,6 +249,45 @@
         function copyPageUrl() {
             copyTextFallback(window.location.href);
             showToast("Ссылка скопирована");
+        }
+
+        // Умное открытие нативных приложений на смартфоне с фолбэком в браузер
+        function openSmartLink(event, appUrl, webUrl) {
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            if (!isMobile) {
+                return true; // На ПК открываем обычную веб-ссылку в новой вкладке
+            }
+
+            event.preventDefault();
+            const start = Date.now();
+            window.location.href = appUrl;
+
+            // Если приложение не установлено и вкладка не свернулась за 1.2 сек — открываем веб-версию
+            setTimeout(() => {
+                if (!document.hidden && Date.now() - start < 2000) {
+                    window.location.href = webUrl;
+                }
+            }, 1200);
+
+            return false;
+        }
+
+        // Умное открытие Discord: копирует ник z1fex и запускает приложение Discord
+        function openDiscordSmart(event) {
+            event.preventDefault();
+            copyDiscord();
+
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const start = Date.now();
+            window.location.href = isMobile ? 'discord://' : 'discord://-/channels/@me';
+
+            setTimeout(() => {
+                if (!document.hidden && Date.now() - start < 2000) {
+                    window.open('https://discord.com/app', '_blank', 'noopener,noreferrer');
+                }
+            }, 1200);
+
+            return false;
         }
     </script>
 </body>
