@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>akmavren</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Шрифты Inter и JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Иконки FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#09090b] text-[#fafafa] min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-10 antialiased selection:bg-white selection:text-black">
+
+    <!-- Адаптивный контейнер: 1 колонка на телефоне, 2 колонки (Bento) на ПК/планшете -->
+    <main class="w-full max-w-4xl">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5">
+            
+            <!-- Левая карточка: Профиль -->
+            <section class="md:col-span-5 bg-[#111113] border border-[#222225] rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+                <div>
+                    <!-- Верхняя строка: индикатор и кнопка поделиться -->
+                    <div class="flex items-center justify-between mb-6 sm:mb-8">
+                        <span class="inline-flex items-center gap-2 text-xs font-mono text-zinc-500">
+                            <span class="w-1.5 h-1.5 rounded-full bg-zinc-400"></span>
+                            akmavren
+                        </span>
+                        <button type="button" onclick="copyPageUrl()" aria-label="Поделиться"
+                            class="w-9 h-9 rounded-full bg-[#18181b] hover:bg-[#222226] border border-[#27272a] flex items-center justify-center text-zinc-400 hover:text-white transition-colors cursor-pointer">
+                            <i class="fa-solid fa-link text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Аватар и имя -->
+                    <div class="flex items-center md:items-start md:flex-col gap-4 sm:gap-5">
+                        <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#18181b] border border-[#27272a] overflow-hidden shrink-0">
+                            <img 
+                                src="https://unavatar.io/instagram/akmavren?fallback=https://unavatar.io/tiktok/akmavren" 
+                                alt="akmavren"
+                                class="w-full h-full object-cover"
+                                onerror="this.style.display='none'; document.getElementById('fallback-avatar').style.display='flex';"
+                            >
+                            <div id="fallback-avatar" style="display: none;" class="w-full h-full bg-[#18181b] items-center justify-center text-2xl font-bold text-zinc-300">
+                                AK
+                            </div>
+                        </div>
+
+                        <div>
+                            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+                                akmavren
+                            </h1>
+                            <p class="text-sm font-mono text-zinc-500 mt-1">
+                                @akmavren
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Нижняя подпись на десктопе -->
+                <div class="hidden md:flex items-center justify-between pt-8 mt-8 border-t border-[#1e1e21] text-xs font-mono text-zinc-600">
+                    <span>© <span id="year-desktop"></span></span>
+                    <span>links</span>
+                </div>
+            </section>
+
+            <!-- Правая часть: Сетка соцсетей (1 колонка на мобильных, 2x2 на ПК) -->
+            <section class="md:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/akmavren" target="_blank" rel="noopener noreferrer"
+                   class="group bg-[#111113] hover:bg-[#161619] border border-[#222225] hover:border-[#36363b] rounded-3xl p-5 sm:p-6 flex flex-row sm:flex-col items-center sm:items-start justify-between transition-colors duration-200 min-h-[84px] sm:min-h-[168px]">
+                    <div class="flex sm:w-full items-center justify-between gap-4">
+                        <div class="w-11 h-11 rounded-2xl bg-[#18181b] border border-[#27272a] flex items-center justify-center text-zinc-200 group-hover:text-white transition-colors">
+                            <i class="fa-brands fa-instagram text-xl"></i>
+                        </div>
+                        <i class="hidden sm:inline-block fa-solid fa-arrow-up-right text-zinc-600 group-hover:text-zinc-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-sm"></i>
+                    </div>
+                    <div class="flex-1 sm:flex-none ml-4 sm:ml-0 sm:mt-6">
+                        <div class="font-semibold text-base text-zinc-100">Instagram</div>
+                        <div class="text-xs font-mono text-zinc-500 mt-0.5">@akmavren</div>
+                    </div>
+                    <i class="sm:hidden fa-solid fa-arrow-up-right text-zinc-600 text-xs"></i>
+                </a>
+
+                <!-- TikTok -->
+                <a href="https://www.tiktok.com/@akmavren" target="_blank" rel="noopener noreferrer"
+                   class="group bg-[#111113] hover:bg-[#161619] border border-[#222225] hover:border-[#36363b] rounded-3xl p-5 sm:p-6 flex flex-row sm:flex-col items-center sm:items-start justify-between transition-colors duration-200 min-h-[84px] sm:min-h-[168px]">
+                    <div class="flex sm:w-full items-center justify-between gap-4">
+                        <div class="w-11 h-11 rounded-2xl bg-[#18181b] border border-[#27272a] flex items-center justify-center text-zinc-200 group-hover:text-white transition-colors">
+                            <i class="fa-brands fa-tiktok text-lg"></i>
+                        </div>
+                        <i class="hidden sm:inline-block fa-solid fa-arrow-up-right text-zinc-600 group-hover:text-zinc-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-sm"></i>
+                    </div>
+                    <div class="flex-1 sm:flex-none ml-4 sm:ml-0 sm:mt-6">
+                        <div class="font-semibold text-base text-zinc-100">TikTok</div>
+                        <div class="text-xs font-mono text-zinc-500 mt-0.5">@akmavren</div>
+                    </div>
+                    <i class="sm:hidden fa-solid fa-arrow-up-right text-zinc-600 text-xs"></i>
+                </a>
+
+                <!-- Telegram -->
+                <a href="https://t.me/akmavren" target="_blank" rel="noopener noreferrer"
+                   class="group bg-[#111113] hover:bg-[#161619] border border-[#222225] hover:border-[#36363b] rounded-3xl p-5 sm:p-6 flex flex-row sm:flex-col items-center sm:items-start justify-between transition-colors duration-200 min-h-[84px] sm:min-h-[168px]">
+                    <div class="flex sm:w-full items-center justify-between gap-4">
+                        <div class="w-11 h-11 rounded-2xl bg-[#18181b] border border-[#27272a] flex items-center justify-center text-zinc-200 group-hover:text-white transition-colors">
+                            <i class="fa-brands fa-telegram text-xl"></i>
+                        </div>
+                        <i class="hidden sm:inline-block fa-solid fa-arrow-up-right text-zinc-600 group-hover:text-zinc-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-sm"></i>
+                    </div>
+                    <div class="flex-1 sm:flex-none ml-4 sm:ml-0 sm:mt-6">
+                        <div class="font-semibold text-base text-zinc-100">Telegram</div>
+                        <div class="text-xs font-mono text-zinc-500 mt-0.5">t.me/akmavren</div>
+                    </div>
+                    <i class="sm:hidden fa-solid fa-arrow-up-right text-zinc-600 text-xs"></i>
+                </a>
+
+                <!-- Discord (Ссылка + копирование ника z1fex) -->
+                <div class="group bg-[#111113] hover:bg-[#161619] border border-[#222225] hover:border-[#36363b] rounded-3xl p-5 sm:p-6 flex flex-row sm:flex-col items-center sm:items-start justify-between transition-colors duration-200 min-h-[84px] sm:min-h-[168px] relative">
+                    <div class="flex sm:w-full items-center justify-between gap-4">
+                        <a href="https://discord.com/users/z1fex" target="_blank" rel="noopener noreferrer" onclick="copyDiscord()"
+                           class="w-11 h-11 rounded-2xl bg-[#18181b] border border-[#27272a] flex items-center justify-center text-zinc-200 group-hover:text-white transition-colors">
+                            <i class="fa-brands fa-discord text-lg"></i>
+                        </a>
+                        <!-- Кнопка быстрого копирования ника -->
+                        <button type="button" onclick="copyDiscord()" title="Скопировать ник z1fex"
+                            class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#18181b] hover:bg-[#242429] border border-[#27272a] text-[11px] font-mono text-zinc-400 hover:text-white transition-colors cursor-pointer z-10">
+                            <i id="discord-icon-desktop" class="fa-regular fa-copy"></i>
+                            <span>copy</span>
+                        </button>
+                    </div>
+
+                    <a href="https://discord.com/users/z1fex" target="_blank" rel="noopener noreferrer" onclick="copyDiscord()"
+                       class="flex-1 sm:flex-none ml-4 sm:ml-0 sm:mt-6 block">
+                        <div class="font-semibold text-base text-zinc-100">Discord</div>
+                        <div class="text-xs font-mono text-zinc-500 mt-0.5">z1fex</div>
+                    </a>
+
+                    <button type="button" onclick="copyDiscord()" aria-label="Скопировать ник Discord"
+                        class="sm:hidden w-8 h-8 rounded-lg bg-[#18181b] border border-[#27272a] flex items-center justify-center text-zinc-400 active:text-white">
+                        <i id="discord-icon-mobile" class="fa-regular fa-copy text-xs"></i>
+                    </button>
+                </div>
+
+            </section>
+
+            <!-- Мобильный футер -->
+            <footer class="md:hidden flex items-center justify-between px-2 pt-2 text-xs font-mono text-zinc-600">
+                <span>© <span id="year-mobile"></span> akmavren</span>
+                <span>links</span>
+            </footer>
+
+        </div>
+    </main>
+
+    <!-- Минималистичное уведомление -->
+    <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 translate-y-2 transition-all duration-200">
+        <div class="px-4 py-2.5 rounded-xl bg-[#18181b] border border-[#2e2e33] text-zinc-100 text-xs font-mono shadow-xl">
+            <span id="toast-message">Скопировано</span>
+        </div>
+    </div>
+
+    <script>
+        const currentYear = new Date().getFullYear();
+        document.getElementById('year-desktop').textContent = currentYear;
+        document.getElementById('year-mobile').textContent = currentYear;
+
+        function copyTextFallback(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+            } catch (err) {
+                console.error(err);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = message;
+
+            toast.classList.remove('opacity-0', 'translate-y-2');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'translate-y-2');
+            }, 2000);
+        }
+
+        function copyDiscord() {
+            copyTextFallback("z1fex");
+            const dIcon = document.getElementById('discord-icon-desktop');
+            const mIcon = document.getElementById('discord-icon-mobile');
+            if (dIcon) dIcon.className = "fa-solid fa-check text-white";
+            if (mIcon) mIcon.className = "fa-solid fa-check text-white text-xs";
+
+            setTimeout(() => {
+                if (dIcon) dIcon.className = "fa-regular fa-copy";
+                if (mIcon) mIcon.className = "fa-regular fa-copy text-xs";
+            }, 1800);
+
+            showToast("Скопировано: z1fex");
+        }
+
+        function copyPageUrl() {
+            copyTextFallback(window.location.href);
+            showToast("Ссылка скопирована");
+        }
+    </script>
+</body>
+</html>
